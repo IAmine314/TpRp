@@ -1,16 +1,25 @@
 import pygame
 from box import Box
 from typing import List
+from time import sleep
+
+
 class Player:
     def __init__(self, board, position , boxes : List[Box]):
         self.row, self.column = position
         self.board = board
         self.boxes = boxes
 
+    def play(self , moves) : 
+        for move in moves : 
+            self.move(move)
+            sleep(1)
+            
+
     def move(self, direction):
 
         # Move UP
-        if direction == pygame.K_UP:
+        if direction == "UP":
             if self.board[self.row - 1][self.column] == "v":
                 self.board[self.row][self.column] = "v"
                 self.row -= 1  # Update the player's row position
@@ -20,7 +29,7 @@ class Player:
                 return self.move(direction)
 
         # Move DOWN
-        elif direction == pygame.K_DOWN:
+        elif direction == "DOWN":
             if self.board[self.row + 1][self.column] == "v":
                 self.board[self.row][self.column] = "v"
                 self.row += 1  # Update the player's row position
@@ -32,7 +41,7 @@ class Player:
                 print("heloo")
 
         # Move RIGHT
-        elif direction == pygame.K_RIGHT:
+        elif direction == "RIGHT":
             if self.board[self.row][self.column + 1] == "v":
                 self.board[self.row][self.column] = "v"
                 self.column += 1  # Update the player's column position
@@ -42,7 +51,7 @@ class Player:
                 return self.move(direction)
 
         # Move LEFT
-        elif direction == pygame.K_LEFT:
+        elif direction == "LEFT":
             if self.board[self.row][self.column - 1] == "v":
                 self.board[self.row][self.column] = "v"
                 self.column -= 1  # Update the player's column position
